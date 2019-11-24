@@ -5,7 +5,11 @@ export function askAndReturnSearchTerm() {
 }
 
 export function askAndReturnPrefix() {
-  const prefixes = ["Who is", "What is", "The history of"];
+  const prefixes: Array<"Who is" | "What is" | "The history of"> = [
+    "Who is",
+    "What is",
+    "The history of"
+  ];
 
   const selectedPrefixIndex = readline.keyInSelect(
     prefixes,

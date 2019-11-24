@@ -4,16 +4,27 @@ import {
   askAndReturnPrefix
 } from "./modules/userInput";
 
+interface IData {
+  searchTerm: string | null;
+  prefix: "Who is" | "What is" | "The history of" | null;
+  sourceContentOriginal: string | null;
+  sourceContentSanitized: string | null;
+  sentences: Array<{ text: string; keywords: string[]; images: string[] }>;
+}
+
 function start() {
-  const content = {
-    searchTerm: "",
-    prefix: ""
+  const data: IData = {
+    searchTerm: null,
+    prefix: null,
+    sourceContentOriginal: null,
+    sourceContentSanitized: null,
+    sentences: []
   };
 
-  content.searchTerm = askAndReturnSearchTerm();
-  content.prefix = askAndReturnPrefix();
+  data.searchTerm = askAndReturnSearchTerm();
+  data.prefix = askAndReturnPrefix();
 
-  console.log(content);
+  console.log(data);
 }
 
 start();
