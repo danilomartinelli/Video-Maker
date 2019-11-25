@@ -11,6 +11,7 @@ interface IData {
   sourceContentOriginal: string | null;
   sourceContentSanitized: string | null;
   sentences: Array<{ text: string; keywords: string[]; images: string[] }>;
+  maximumSentences: number;
 }
 
 async function start() {
@@ -19,7 +20,8 @@ async function start() {
     prefix: null,
     sourceContentOriginal: null,
     sourceContentSanitized: null,
-    sentences: []
+    sentences: [],
+    maximumSentences: 7
   };
 
   // User Input
@@ -31,7 +33,7 @@ async function start() {
     sourceContentOriginal,
     sourceContentSanitized,
     sentences
-  } = await textRobot(data.searchTerm);
+  } = await textRobot(data.searchTerm, data.maximumSentences);
   data.sourceContentOriginal = sourceContentOriginal;
   data.sourceContentSanitized = sourceContentSanitized;
   data.sentences = sentences;
