@@ -15,7 +15,17 @@ async function fetchContentFromWikipedia(searchTerm: string) {
 }
 
 function sanitizeContent(content: string) {
-  return content;
+  const allLines = content.split("\n");
+  const withoutBlankLines = allLines.filter(line => line.trim().length !== 0);
+  const withoutMarkdown = withoutBlankLines.filter(
+    line => !line.trim().startsWith("=")
+  );
+  const sanitizedContentWithDates = withoutMarkdown.join(" ");
+  const sanitizedContent = sanitizedContentWithDates
+    .replace(/\((?:\([^()]*\)|[^()])*\)/gm, "")
+    .replace(/  /g, " ");
+
+  return sanitizedContent;
 }
 
 function breakContentIntoSentences(content: string) {
