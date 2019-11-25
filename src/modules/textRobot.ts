@@ -6,11 +6,11 @@ async function fetchContentFromWikipedia(searchTerm: string) {
   const wikipediaAlgorithm = algorithmiaAuthenticated.algo(
     "web/WikipediaParser/0.1.2"
   );
-  const wikipediaResponde = await wikipediaAlgorithm.pipe({
+  const wikipediaResponse = await wikipediaAlgorithm.pipe({
     articleName: searchTerm,
     lang: "en"
   });
-  const wikipediaContent = wikipediaResponde.get();
+  const wikipediaContent = wikipediaResponse.get();
 
   return wikipediaContent.content;
 }
