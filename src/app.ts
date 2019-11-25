@@ -4,6 +4,7 @@ import {
   askAndReturnPrefix
 } from "./modules/userInput";
 import { textRobot } from "./modules/textRobot";
+import { save, load } from "./modules/state";
 
 interface IData {
   searchTerm: string | null;
@@ -15,7 +16,7 @@ interface IData {
 }
 
 async function start() {
-  const data: IData = {
+  let data: IData = {
     searchTerm: null,
     prefix: null,
     sourceContentOriginal: null,
@@ -25,20 +26,24 @@ async function start() {
   };
 
   // User Input
+  data = load();
   data.searchTerm = askAndReturnSearchTerm();
   data.prefix = askAndReturnPrefix();
+  save(data);
 
   // Text Robot
+  data = load();
   const {
     sourceContentOriginal,
     sourceContentSanitized,
     sentences
-  } = await textRobot(data.searchTerm, data.maximumSentences);
+  } = await textRobot(data.searchTerm!, data.maximumSentences);
   data.sourceContentOriginal = sourceContentOriginal;
   data.sourceContentSanitized = sourceContentSanitized;
   data.sentences = sentences;
+  save(data);
 
-  console.log(data);
+  console.dir(data, { depth: null });
 }
 
 start();
