@@ -1,4 +1,5 @@
 import algorithmia from "algorithmia";
+import sentenceBoundaryDetection from "sbd";
 
 async function fetchContentFromWikipedia(searchTerm: string) {
   const algorithmiaAuthenticated = algorithmia(process.env.ALGORITHMIA_API_KEY);
@@ -29,7 +30,13 @@ function sanitizeContent(content: string) {
 }
 
 function breakContentIntoSentences(content: string) {
-  return [];
+  const sentences = sentenceBoundaryDetection.sentences(content);
+
+  return sentences.map(sentence => ({
+    text: sentence,
+    keywords: [],
+    images: []
+  }));
 }
 
 export async function textRobot(searchTerm: string) {
