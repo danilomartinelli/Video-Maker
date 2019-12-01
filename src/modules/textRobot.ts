@@ -61,14 +61,23 @@ async function breakContentIntoSentences(content: string, limit: number) {
       keywords: nluResponse.result.keywords!.map(keyword => keyword.text!),
       images: []
     });
+
+    console.log(
+      `   > Added keywords to sentence #${parsedSentences.length} of ${limit} sentences.`
+    );
   }
 
   return parsedSentences;
 }
 
 export async function textRobot(searchTerm: string, maximumSentences: number) {
+  console.log(`> Searching for ${searchTerm} on Wikipedia...`);
   const sourceContentOriginal = await fetchContentFromWikipedia(searchTerm);
+
   const sourceContentSanitized = sanitizeContent(sourceContentOriginal);
+  console.log(`> Source content sanitized.`);
+
+  console.log(`> Breaking content into sentences with keywords...`);
   const sentences = await breakContentIntoSentences(
     sourceContentSanitized,
     maximumSentences

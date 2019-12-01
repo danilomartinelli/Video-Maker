@@ -70,7 +70,7 @@ async function start() {
 
   const data = load();
 
-  console.dir(data, { depth: null });
+  // console.dir(data, { depth: null });
 }
 
 start();
