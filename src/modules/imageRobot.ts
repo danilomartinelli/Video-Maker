@@ -1,6 +1,7 @@
 import { google } from "googleapis";
 import imageDownloader from "image-downloader";
 import path from "path";
+import gm from "gm";
 
 const ROOT_DIR = path.resolve(__dirname);
 

@@ -6,6 +6,7 @@ import {
 import { textRobot } from "./modules/textRobot";
 import { imageRobot } from "./modules/imageRobot";
 import { save, load } from "./modules/state";
+import { videoRobot } from "./modules/videoRobot";
 
 interface IData {
   searchTerm: string | null;
@@ -62,15 +63,24 @@ async function imageInputStep() {
   save(data);
 }
 
+async function videoRobotStep() {
+  const data: IData = load();
+
+  await videoRobot(data.sentences);
+
+  save(data);
+}
+
 async function start() {
   await initData();
   await userInputStep();
   await textInputStep();
   await imageInputStep();
+  await videoRobotStep();
 
   const data = load();
 
-  // console.dir(data, { depth: null });
+  console.dir(data, { depth: null });
 }
 
 start();
