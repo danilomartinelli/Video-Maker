@@ -1,6 +1,5 @@
 node_modules/
 build/
 .env
-src/content/*.json
-src/content/*.png
+src/content
 .DS_store
