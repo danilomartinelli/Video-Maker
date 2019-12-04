@@ -3,3 +3,4 @@ build/
 .env
 src/content/*.json
 src/content/*.png
+.DS_store
