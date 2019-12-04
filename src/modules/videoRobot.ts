@@ -92,7 +92,7 @@ async function createYoutubeThumbnail() {
     const inputFile = path.resolve(ROOT_DIR, `../content/0-converted.png`);
     const outputFile = path.resolve(
       ROOT_DIR,
-      `../content/youtube-thumbnail.jpg`
+      `../content/youtube-thumbnail.png`
     );
 
     imageMagick(inputFile).write(outputFile, error => {
